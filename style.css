@@ -37,7 +37,7 @@ body{
 
 .btn-submit:hover{
     width: 5.2rem;
-    background: rgb(61, 53, 53);
+    background: rgb(116, 116, 116);
     color: white;
     cursor: pointer;
 }

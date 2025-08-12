@@ -5,19 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Avisos</title>
+    <title>Cadastra Produtos</title>
 </head>
 
 <body>
     <section>
         <form action="" class="form-conteiner" id="formularioId">
             <label for="nomeProduto" class="form-label">Produto: </label>
-            <input type="text" name="nomeProduto" id="inputProduto" placeholder="Nome do Produto..." class="form-input"
-                value="Notebook">
+            <input type="text" name="nomeProduto" id="inputProduto" placeholder="Nome do Produto..." class="form-input">
 
             <label for="valorDoProduto" class="form-label">Valor: </label>
-            <input type="text" name="valorDoProduto" id="inputValor" placeholder="Valor..." class="form-input"
-                value="12564">
+            <input type="text" name="valorDoProduto" id="inputValor" placeholder="Valor..." class="form-input">
 
             <button type="submit" class="btn-submit"> Cadastra </button>
 
@@ -29,7 +27,7 @@
             <h1>TABELA</h1>
         </div>
 
-        <table>
+        <table id="table-users">
             <!-- Este é o cabeçario da tabela -->
             <thead>
                 <tr>
@@ -39,35 +37,10 @@
             </thead>
 
             <!-- Corpo da tabela -->
-            <Tbody>
+            <!-- coloquei o id da tabela -->
+            <Tbody id="table-users">
 
-                <tr>
-                    <td>Computador</td>
-                    <td>3598.96</td>
-                    <td>
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-delete">Excluir</button>
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td>Notebook</td>
-                    <td>2599.99</td>
-                    <td>
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-delete">Excluir</button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Celular</td>
-                    <td>1585.95</td>
-                    <td>
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-delete">Excluir</button>
-                    </td>
-                </tr>
+                <!-- aqui esta a tabela que esta sendo criado pelo javascripts... -->
 
             </Tbody>
 
@@ -75,6 +48,9 @@
 
     </section>
 
+
+    <script src="model/User.js"></script>
+    <script src="controllers/UserController.js"></script>
     <script src="index.js"></script>
 
 </body>
