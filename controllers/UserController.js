@@ -43,17 +43,19 @@ class UserController{
     // data é objeto da class => representa a class
     addLine(dataUser){
 
+        let tr = document.createElement('tr');
+
         // criando o modelo do html
         // pegando o Id da tabela tbody para coloca o html
-        this.tableEl.innerHTML = `
-            <tr>
+        tr.innerHTML = `
                 <td>${dataUser.nomeProduto}</td>
                 <td>${dataUser.valorDoProduto}</td>
                 <td>
                     <button class="btn-editar">Editar</button>
                     <button class="btn-delete">Excluir</button>
-                </td>    
-            </tr>`;
+                </td>
+        `;
+            this.tableEl.appendChild(tr);
     
     };
 
