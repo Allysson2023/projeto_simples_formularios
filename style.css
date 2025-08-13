@@ -49,6 +49,7 @@ body{
     max-width: 60%;
     margin: 0 auto;
     margin-top: 0.3rem;
+    background: white;
 }
 .pdt-main:hover{
     background: rgb(231, 231, 241);
@@ -77,4 +78,8 @@ table td, table th{
     color: white;
     background: red;
     cursor: pointer;
+}
+
+.adc-principal{
+    justify-items: center;
 }
