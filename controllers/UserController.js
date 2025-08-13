@@ -22,7 +22,14 @@ class UserController{
 
             btn.disabled = true;
 
-            this.addLine(this.getValues());
+            let userData = this.getValues();
+            if(!userData){
+                btn.disabled = false;
+                alert("Preencha o formulario!")
+                return;
+            }
+
+            this.addLine(userData);
 
             this.formEl.reset();
 
@@ -36,12 +43,25 @@ class UserController{
 
         let user = {};
 
+        let isValid = true;
+
         // pegando o campos do fomularios
         [...this.formEl.elements].forEach( (field, index)=>{
+
+            if(["nomeProduto", "valorDoProduto"].indexOf(field.name) > -1 && !field.value){
+
+                field.parentElement.classList.add('has-error');
+                isValid = false;
+
+            }
 
             user[field.name] = field.value;
 
         });
+
+        if(!isValid){
+            return false;
+        }
 
         return new User(user.nomeProduto, user.valorDoProduto);
 
