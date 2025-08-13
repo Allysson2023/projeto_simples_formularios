@@ -18,7 +18,15 @@ class UserController{
             // preventeDefault -> é para não atualiza a pagina...
             evento.preventDefault();
 
+            let btn = this.formEl.querySelector("[type=submit]");
+
+            btn.disabled = true;
+
             this.addLine(this.getValues());
+
+            this.formEl.reset();
+
+            btn.disabled = false;
 
         });
 
