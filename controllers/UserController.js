@@ -93,7 +93,21 @@ class UserController{
         `;
 
         tr.querySelector(".btn-edt").addEventListener("click", e=>{
-            console.log(JSON.parse(tr.dataset.user));
+            let json = JSON.parse(tr.dataset.user);
+            let form = document.querySelector("#formularioIdUpdate");
+
+            for(let nome in json){
+
+                let field = form.querySelector("[name=" + nome.replace("_","") + "]");
+
+                if(field){
+                    field.value = json[nome]
+                };
+
+
+            }
+
+
             this.showPanelUpdate();
             
         });
