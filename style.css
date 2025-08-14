@@ -83,3 +83,24 @@ table td, table th{
 .adc-principal{
     justify-items: center;
 }
+
+.form-conteiner-editar{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0.5rem;
+    border: 0.1rem solid rgb(180, 180, 180);
+    padding: 6rem;
+    background: rgb(255, 255, 255);
+    border-radius: 2rem;
+    max-width: 40%;
+}
+.btn-editar{
+    display: flex;
+    flex-direction: row;
+    background: rgb(154, 151, 151);
+    margin: 0 auto;
+    padding: 0.9rem;
+
+
+}
