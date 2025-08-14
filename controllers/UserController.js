@@ -7,7 +7,15 @@ class UserController{
         this.tableEl = document.getElementById(tableId);
 
         this.onSubmit();
+        this.onCancelar();
     };
+    onCancelar(){
+        document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e=>{
+
+            this.showPanelCreate();
+
+        });
+    }
 
     // methodo do butao submit para envia o formulario
     onSubmit(){
@@ -72,19 +80,35 @@ class UserController{
     addLine(dataUser){
 
         let tr = document.createElement('tr');
-
+        tr.dataset.user = JSON.stringify(dataUser);
         // criando o modelo do html
         // pegando o Id da tabela tbody para coloca o html
         tr.innerHTML = `
                 <td>${dataUser.nomeProduto}</td>
                 <td>${dataUser.valorDoProduto}</td>
                 <td>
-                    <button class="btn-editar">Editar</button>
+                    <button class="btn-editar btn-edt ">Editar</button>
                     <button class="btn-delete">Excluir</button>
                 </td>
         `;
-            this.tableEl.appendChild(tr);
+
+        tr.querySelector(".btn-edt").addEventListener("click", e=>{
+            console.log(JSON.parse(tr.dataset.user));
+            this.showPanelUpdate();
+            
+        });
+        
+        this.tableEl.appendChild(tr);
     
+    };
+
+    showPanelCreate(){
+        document.querySelector("#box-user-create").style.display = "block";
+        document.querySelector("#box-user-update").style.display = "none";
+    };
+    showPanelUpdate(){
+        document.querySelector("#box-user-create").style.display = "none";
+        document.querySelector("#box-user-update").style.display = "block";
     };
 
 }
