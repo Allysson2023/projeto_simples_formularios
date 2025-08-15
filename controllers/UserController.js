@@ -1,21 +1,57 @@
 class UserController{
 
     // pegando o id do formularios
-    constructor(formId, tableId){
+    constructor(formIdCreate, formIdUpdate, tableId){
 
-        this.formEl = document.getElementById(formId);
+        this.formEl = document.getElementById(formIdCreate);
+        this.formUpdateEl = document.getElementById(formIdUpdate);
         this.tableEl = document.getElementById(tableId);
 
         this.onSubmit();
-        this.onCancelar();
+        this.onEdit();
     };
-    onCancelar(){
+
+    onEdit(){
         document.querySelector("#box-user-update .btn-cancel").addEventListener("click", e=>{
 
             this.showPanelCreate();
 
         });
+
+        this.formUpdateEl.addEventListener("submit", evento=>{
+            evento.preventDefault();
+            let btn = this.formUpdateEl.querySelector("[type=submit]");
+
+            btn.disabled = true;
+
+            let userData = this.getValues(this.formUpdateEl);
+            if(!userData){
+                btn.disabled = false;
+                alert("Preencha o formulario!")
+                return;
+            }
+
+            let index = this.formUpdateEl.dataset.trIndex;
+
+            let tr = this.tableEl.rows[index];
+
+            tr.dataset.user = JSON.stringify(userData);
+
+            tr.innerHTML = `
+                <td>${userData.nomeProduto}</td>
+                <td>${userData.valorDoProduto}</td>
+                <td>
+                    <button class="btn-editar btn-edt ">Editar</button>
+                    <button class="btn-delete">Excluir</button>
+                </td>
+            `;
+
+            this.addEventsTr(tr);
+            
+        });
+
     }
+
 
     // methodo do butao submit para envia o formulario
     onSubmit(){
@@ -30,7 +66,7 @@ class UserController{
 
             btn.disabled = true;
 
-            let userData = this.getValues();
+            let userData = this.getValues(this.formEl);
             if(!userData){
                 btn.disabled = false;
                 alert("Preencha o formulario!")
@@ -47,14 +83,14 @@ class UserController{
 
     }
 
-    getValues(){
+    getValues(formEl){
 
         let user = {};
 
         let isValid = true;
 
         // pegando o campos do fomularios
-        [...this.formEl.elements].forEach( (field, index)=>{
+        [...formEl.elements].forEach( (field, index)=>{
 
             if(["nomeProduto", "valorDoProduto"].indexOf(field.name) > -1 && !field.value){
 
@@ -92,9 +128,18 @@ class UserController{
                 </td>
         `;
 
+        this.addEventsTr(tr);
+        
+        this.tableEl.appendChild(tr);
+    
+    };
+
+    addEventsTr(tr){
         tr.querySelector(".btn-edt").addEventListener("click", e=>{
             let json = JSON.parse(tr.dataset.user);
             let form = document.querySelector("#formularioIdUpdate");
+
+            form.dataset.trIndex = tr.sectionRowIndex;
 
             for(let nome in json){
 
@@ -102,7 +147,7 @@ class UserController{
 
                 if(field){
                     field.value = json[nome]
-                };
+                }
 
 
             }
@@ -111,10 +156,7 @@ class UserController{
             this.showPanelUpdate();
             
         });
-        
-        this.tableEl.appendChild(tr);
-    
-    };
+    }
 
     showPanelCreate(){
         document.querySelector("#box-user-create").style.display = "block";
