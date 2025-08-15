@@ -47,6 +47,13 @@ class UserController{
             `;
 
             this.addEventsTr(tr);
+
+            btn.disabled = false;
+
+            this.formUpdateEl.reset();
+
+            this.showPanelCreate();
+
             
         });
 
@@ -124,7 +131,7 @@ class UserController{
                 <td>${dataUser.valorDoProduto}</td>
                 <td>
                     <button class="btn-editar btn-edt ">Editar</button>
-                    <button class="btn-delete">Excluir</button>
+                    <button class="btn-delete btn-delete">Excluir</button>
                 </td>
         `;
 
@@ -135,6 +142,17 @@ class UserController{
     };
 
     addEventsTr(tr){
+
+        tr.querySelector(".btn-delete").addEventListener("click", e=>{
+
+            if(confirm("Deseja Realmente Excluir?")){
+
+                tr.remove();
+
+            }
+
+        });
+
         tr.querySelector(".btn-edt").addEventListener("click", e=>{
             let json = JSON.parse(tr.dataset.user);
             let form = document.querySelector("#formularioIdUpdate");
