@@ -9,6 +9,7 @@ class UserController{
 
         this.onSubmit();
         this.onEdit();
+        this.selactAll();
     };
 
     onEdit(){
@@ -80,6 +81,8 @@ class UserController{
                 return;
             }
 
+            this.insert(userData);
+
             this.addLine(userData);
 
             this.formEl.reset();
@@ -118,11 +121,49 @@ class UserController{
 
     };
 
+    getUserStorage(){
+        let users = [];
+    
+        if(sessionStorage.getItem("user")){
+            users = JSON.parse(sessionStorage.getItem("user"));
+        }
+        return users;
+
+    }
+
+    // lista todos os dados que ja estao no sessionStorage
+    selactAll(){
+        let users = this.getUserStorage();
+
+        users.forEach(dataUser=>{
+
+            let user = new User();
+
+            user.loadFromJSON(dataUser);
+
+            this.addLine(user);
+
+        });
+
+    }
+
+    // Salvando no sessionStorage
+    insert(data){
+
+        let users = this.getUserStorage();
+
+        users.push(data);
+
+        sessionStorage.setItem("user", JSON.stringify(users));
+
+    }
+
     // adicionando uma linha na tabela...
     // data é objeto da class => representa a class
     addLine(dataUser){
 
         let tr = document.createElement('tr');
+
         tr.dataset.user = JSON.stringify(dataUser);
         // criando o modelo do html
         // pegando o Id da tabela tbody para coloca o html

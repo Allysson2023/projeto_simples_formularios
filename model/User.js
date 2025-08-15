@@ -12,4 +12,14 @@ class User{
         return this._valorDoProduto;
     }
 
+    loadFromJSON(json){
+
+        for (let name in json){
+
+            this[name] = json[name];
+
+        };
+
+    }
+
 }
