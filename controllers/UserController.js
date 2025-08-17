@@ -36,18 +36,11 @@ class UserController{
 
             let tr = this.tableEl.rows[index];
 
-            tr.dataset.user = JSON.stringify(userData);
+            let user = new User();
 
-            tr.innerHTML = `
-                <td>${userData.nomeProduto}</td>
-                <td>${userData.valorDoProduto}</td>
-                <td>
-                    <button class="btn-editar btn-edt ">Editar</button>
-                    <button class="btn-delete">Excluir</button>
-                </td>
-            `;
+            user.loadFromJSON(userData);
 
-            this.addEventsTr(tr);
+            this.getTr(user, tr);
 
             btn.disabled = false;
 
@@ -163,11 +156,22 @@ class UserController{
     // data é objeto da class => representa a class
     addLine(dataUser){
 
-        let tr = document.createElement('tr');
+
+        let tr = this.getTr(dataUser);
+        
+        this.tableEl.appendChild(tr);
+        
+        
+    };
+    
+    // criando o modelo do html
+    // pegando o Id da tabela tbody para coloca o html
+    getTr(dataUser, tr = null){
+
+        if(tr == null) tr = document.createElement('tr');
 
         tr.dataset.user = JSON.stringify(dataUser);
-        // criando o modelo do html
-        // pegando o Id da tabela tbody para coloca o html
+
         tr.innerHTML = `
                 <td>${dataUser.nomeProduto}</td>
                 <td>${dataUser.valorDoProduto}</td>
@@ -176,12 +180,9 @@ class UserController{
                     <button class="btn-delete btn-delete">Excluir</button>
                 </td>
         `;
-
         this.addEventsTr(tr);
-        
-        this.tableEl.appendChild(tr);
-    
-    };
+        return tr;
+    }
 
     addEventsTr(tr){
 
