@@ -40,6 +40,8 @@ class UserController{
 
             user.loadFromJSON(userData);
 
+            user.save();
+
             this.getTr(user, tr);
 
             btn.disabled = false;
@@ -74,7 +76,7 @@ class UserController{
                 return;
             }
 
-            this.insert(userData);
+            userData.save();
 
             this.addLine(userData);
 
@@ -140,17 +142,6 @@ class UserController{
 
     }
 
-    // Salvando no sessionStorage
-    insert(data){
-
-        let users = this.getUserStorage();
-
-        users.push(data);
-
-        //sessionStorage.setItem("user", JSON.stringify(users));
-        localStorage.setItem("user", JSON.stringify(users));
-
-    }
 
     // adicionando uma linha na tabela...
     // data é objeto da class => representa a class
