@@ -116,19 +116,9 @@ class UserController{
 
     };
 
-    getUserStorage(){
-        let users = [];
-    
-        if(localStorage.getItem("user")){
-            users = JSON.parse(localStorage.getItem("user"));
-        }
-        return users;
-
-    }
-
     // lista todos os dados que ja estao no sessionStorage
     selactAll(){
-        let users = this.getUserStorage();
+        let users = User.getUserStorage();
 
         users.forEach(dataUser=>{
 
@@ -180,6 +170,12 @@ class UserController{
         tr.querySelector(".btn-delete").addEventListener("click", e=>{
 
             if(confirm("Deseja Realmente Excluir?")){
+
+                let user = new User();
+
+                user.loadFromJSON(JSON.parse(tr.dataset.user));
+
+                user.remove();
 
                 tr.remove();
 
